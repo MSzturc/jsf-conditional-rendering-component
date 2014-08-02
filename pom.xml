@@ -193,6 +193,7 @@
                             <systemPropertyVariables>
                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                                 <jboss.home>${project.basedir}/target/wildfly-8.1.0.Final</jboss.home>
+                                <JAVA_OPTS>-Xms256m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m</JAVA_OPTS>
                                 <module.path>${project.basedir}/target/wildfly-8.1.0.Final/modules</module.path>
                             </systemPropertyVariables>
                             <redirectTestOutputToFile>false</redirectTestOutputToFile>
