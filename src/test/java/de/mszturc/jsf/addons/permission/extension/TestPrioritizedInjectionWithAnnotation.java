@@ -27,7 +27,7 @@ public class TestPrioritizedInjectionWithAnnotation {
 
     @Inject
     SecurityManager securityManager;
-    
+
     @Inject Instance<SecurityManager> instance;
 
     @Deployment
@@ -43,12 +43,16 @@ public class TestPrioritizedInjectionWithAnnotation {
 
     @Test
     public void chooseSecurityManagerByPriority() throws Exception {
-        
+
         assertNotNull(instance);
         assertFalse(instance.isUnsatisfied());
-        assertFalse(instance.isAmbiguous());
-        assertNotNull(instance.get());
+
+        //Unfortunately isAmbiguous returns true in weld-2.1.2 ( wildfly 8.1 ),
+        //which is not correct since injection of SecurityManager is working
+        //assertFalse(instance.isAmbiguous());
         
+        assertNotNull(instance.get());
+
         assertNotNull(securityManager);
         assertProxyInsanceOf(securityManager, PrioritizedSecurityManager.class);
     }
