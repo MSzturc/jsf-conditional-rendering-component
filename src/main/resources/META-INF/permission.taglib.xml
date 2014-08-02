@@ -1,0 +1,20 @@
+<facelet-taglib version="2.2"
+                xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+      http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
+ 
+    <namespace>http://www.mszturc.de/jsf/component</namespace>
+    <tag>
+        <tag-name>requires</tag-name>
+        <component>
+            <component-type>requires</component-type>
+        </component>
+        <attribute>
+            <name>permission</name>
+            <description>Defines the permission that will checked against to decide if parent component will be rendered or not.</description>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+</facelet-taglib>
