@@ -216,6 +216,34 @@
         </profile>
         
         <profile>
+            <id>tomee.2.0.0-SNAPSHOT</id>
+            <!--Not working since CDI 1.1 is required-->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <tomee.httpPort>-1</tomee.httpPort>
+                                <tomee.stopPort>-1</tomee.stopPort>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.openejb</groupId>
+                    <artifactId>arquillian-tomee-embedded</artifactId>
+                    <version>2.0.0-SNAPSHOT</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        
+        <profile>
             <id>openejb-embedded</id>
             <!--Not working since CDI 1.1 is required-->
             <dependencies>
@@ -229,12 +257,31 @@
                 <dependency>
                     <groupId>org.apache.openejb</groupId>
                     <artifactId>openejb-core</artifactId>
-                    <version>4.6.0.2</version>
+                    <version>5.0.0-SNAPSHOT</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
         </profile>
         
+        <profile>
+            <id>openejb-embedded-5.0.0-SNAPSHOT</id>
+            <!--Not working since CDI 1.1 is required-->
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.openejb</groupId>
+                    <artifactId>arquillian-openejb-embedded-4</artifactId>
+                    <version>5.0.0-SNAPSHOT</version>
+                    <scope>test</scope>
+                </dependency>
+                
+                <dependency>
+                    <groupId>org.apache.openejb</groupId>
+                    <artifactId>openejb-core</artifactId>
+                    <version>5.0.0-SNAPSHOT</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
         
         <profile>
             <id>wildfly-8.1-final</id>
@@ -303,6 +350,15 @@
         </profile>
         
     </profiles>
+    
+    <repositories>
+        <repository>
+            <id>apache</id>
+            <url>https://repository.apache.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+    
+    <!---->
     
     
     <properties>

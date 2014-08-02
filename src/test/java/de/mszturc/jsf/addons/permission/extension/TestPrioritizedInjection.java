@@ -1,6 +1,5 @@
 package de.mszturc.jsf.addons.permission.extension;
 
-import de.mszturc.jsf.addons.permission.extension.FallbackSecurityManagerExtension;
 import de.mszturc.jsf.addons.permission.security.DefaultSecurityManager;
 import de.mszturc.jsf.addons.permission.security.SecurityManager;
 import de.mszturc.jsf.addons.permission.extension.data.UnflaggedSecurityManager;
