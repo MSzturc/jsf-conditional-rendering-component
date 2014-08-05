@@ -1,6 +1,6 @@
 package de.mszturc.jsf.addons.permission.component;
 
-import de.mszturc.jsf.addons.permission.component.data.DeclineAlwaysSecurityManager;
+import de.mszturc.jsf.addons.permission.component.data.DeclineAlwaysPermissionBinding;
 import de.mszturc.jsf.addons.permission.component.pagemodel.TestPage;
 import java.io.File;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,7 +36,7 @@ public class RequiresComponentTest {
                         .withoutTransitivity().asSingleFile();
         
         return ShrinkWrap.create(WebArchive.class, "login.war")
-                .addClass(DeclineAlwaysSecurityManager.class)
+                .addClass(DeclineAlwaysPermissionBinding.class)
                 .addAsWebResource(new File(WEBAPP_SRC, "test.xhtml"))
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new StringAsset("<faces-config version=\"2.0\"/>"), "faces-config.xml")

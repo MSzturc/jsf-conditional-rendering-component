@@ -1,9 +1,8 @@
 package de.mszturc.jsf.addons.permission.extension;
 
-import de.mszturc.jsf.addons.permission.extension.FallbackSecurityManagerExtension;
-import de.mszturc.jsf.addons.permission.security.DefaultSecurityManager;
-import de.mszturc.jsf.addons.permission.security.SecurityManager;
-import de.mszturc.jsf.addons.permission.extension.data.PrioritizedSecurityManager;
+import de.mszturc.jsf.addons.permission.security.DefaultPermissionBinding;
+import de.mszturc.jsf.addons.permission.security.PermissionBinding;
+import de.mszturc.jsf.addons.permission.extension.data.PrioritizedPermissionBinding;
 import de.mszturc.junit.Assert.Proxy;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
@@ -26,34 +25,34 @@ import static de.mszturc.junit.Assert.Proxy.assertProxyInsanceOf;
 public class TestPrioritizedInjectionWithAnnotation {
 
     @Inject
-    SecurityManager securityManager;
+    PermissionBinding permissionBinding;
 
-    @Inject Instance<SecurityManager> instance;
+    @Inject Instance<PermissionBinding> binding;
 
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(FallbackSecurityManagerExtension.class).addClass(AnnotatedTypeWrapper.class)
+                .addClass(FallbackPermissionBindingExtension.class).addClass(AnnotatedTypeWrapper.class)
                 .addClass(Proxy.class)
                 .addAsManifestResource("META-INF/services/javax.enterprise.inject.spi.Extension")
-                .addClass(SecurityManager.class).addClass(DefaultSecurityManager.class)
-                .addClass(PrioritizedSecurityManager.class)
+                .addClass(PermissionBinding.class).addClass(DefaultPermissionBinding.class)
+                .addClass(PrioritizedPermissionBinding.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Test
-    public void chooseSecurityManagerByPriority() throws Exception {
+    public void choosePermissionBindingByPriority() throws Exception {
 
-        assertNotNull(instance);
-        assertFalse(instance.isUnsatisfied());
+        assertNotNull(binding);
+        assertFalse(binding.isUnsatisfied());
 
         //Unfortunately isAmbiguous returns true in weld-2.1.2 ( wildfly 8.1 ),
-        //which is not correct since injection of SecurityManager is working
+        //which is not correct since injection of PermissionBinding is working
         //assertFalse(instance.isAmbiguous());
         
-        assertNotNull(instance.get());
+        assertNotNull(binding.get());
 
-        assertNotNull(securityManager);
-        assertProxyInsanceOf(securityManager, PrioritizedSecurityManager.class);
+        assertNotNull(permissionBinding);
+        assertProxyInsanceOf(permissionBinding, PrioritizedPermissionBinding.class);
     }
 }

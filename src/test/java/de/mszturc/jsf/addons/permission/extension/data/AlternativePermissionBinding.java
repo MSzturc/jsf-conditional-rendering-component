@@ -1,6 +1,6 @@
 package de.mszturc.jsf.addons.permission.extension.data;
 
-import javax.annotation.Priority;
+import de.mszturc.jsf.addons.permission.security.PermissionBinding;
 import javax.enterprise.inject.Alternative;
 
 /**
@@ -8,8 +8,7 @@ import javax.enterprise.inject.Alternative;
  * Date:   31.07.2014 
  */
 @Alternative
-@Priority(100)
-public class PrioritizedSecurityManager implements de.mszturc.jsf.addons.permission.security.SecurityManager{
+public class AlternativePermissionBinding implements PermissionBinding{
 
     @Override
     public boolean checkPermission(String... permission) {

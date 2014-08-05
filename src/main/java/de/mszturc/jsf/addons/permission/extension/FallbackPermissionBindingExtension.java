@@ -1,6 +1,6 @@
 package de.mszturc.jsf.addons.permission.extension;
 
-import de.mszturc.jsf.addons.permission.security.SecurityManager;
+import de.mszturc.jsf.addons.permission.security.PermissionBinding;
 import java.lang.annotation.Annotation;
 import javax.annotation.Priority;
 import javax.enterprise.event.Observes;
@@ -13,7 +13,7 @@ import javax.enterprise.inject.spi.ProcessAnnotatedType;
  * Author: MSzturc
  * Date:   31.07.2014 
  */
-public class FallbackSecurityManagerExtension implements Extension {
+public class FallbackPermissionBindingExtension implements Extension {
 
     static final Annotation Alternative = new Annotation() {
         @Override
@@ -35,10 +35,10 @@ public class FallbackSecurityManagerExtension implements Extension {
         }
     };
 
-    void processAllImplementations(@Observes ProcessAnnotatedType<? extends de.mszturc.jsf.addons.permission.security.SecurityManager> pat) {
+    void processAllImplementations(@Observes ProcessAnnotatedType<? extends PermissionBinding> pat) {
 
-        AnnotatedType<? extends de.mszturc.jsf.addons.permission.security.SecurityManager> annotatedType = pat.getAnnotatedType();
-        Class<? extends SecurityManager> javaClass = annotatedType.getJavaClass();
+        AnnotatedType<? extends PermissionBinding> annotatedType = pat.getAnnotatedType();
+        Class<? extends PermissionBinding> javaClass = annotatedType.getJavaClass();
         
         if (!javaClass.isAnnotationPresent(Alternative.class) && !javaClass.isAnnotationPresent(Priority.class)) {
             AnnotatedTypeWrapper wrapper = new AnnotatedTypeWrapper<>(annotatedType, Alternative, PriorityMax);

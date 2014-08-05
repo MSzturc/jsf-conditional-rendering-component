@@ -14,13 +14,13 @@ import javax.enterprise.inject.Alternative;
 @Priority(value = 1)
 @Alternative
 @ApplicationScoped
-public class DefaultSecurityManager implements SecurityManager {
+public class DefaultPermissionBinding implements PermissionBinding {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
     
     @PostConstruct
     void onCreate() {
-        logger.log(Level.WARNING, "No concret instance of SecurityManager found in classpath, using fallback DefaultSecurityManager.");
+        logger.log(Level.WARNING, "No concret instance of PermissionBinding found in classpath, using fallback DefaultPermissionBinding.");
     }
 
     @Override

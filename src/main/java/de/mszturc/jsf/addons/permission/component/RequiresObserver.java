@@ -1,6 +1,6 @@
 package de.mszturc.jsf.addons.permission.component;
 
-import de.mszturc.jsf.addons.permission.security.SecurityManager;
+import de.mszturc.jsf.addons.permission.security.PermissionBinding;
 import de.mszturc.jsf.addons.permission.interceptor.RequiresRenderedEvent;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -13,11 +13,11 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class RequiresObserver {
 
-    @Inject SecurityManager securityManager;
+    @Inject PermissionBinding permissionBinding;
 
     public void onEvent(@Observes RequiresRenderedEvent event) {
         Requires requires = event.getRequires();
-        if (!securityManager.checkPermission(requires.getPermission().split(","))) {
+        if (!permissionBinding.checkPermission(requires.getPermission().split(","))) {
             requires.getParent().setRendered(false);
         }
     }
